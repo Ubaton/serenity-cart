@@ -1,5 +1,6 @@
 import React from 'react'
 import { Metadata } from 'next'
+import { Poppins } from 'next/font/google'
 
 import { AdminBar } from './_components/AdminBar'
 import { Footer } from './_components/Footer'
@@ -10,6 +11,12 @@ import { mergeOpenGraph } from './_utilities/mergeOpenGraph'
 
 import './_css/app.scss'
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-Poppins',
+})
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -18,12 +25,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
-      <body>
+      <body className={poppins.variable}>
         <Providers>
           <AdminBar />
           {/* @ts-expect-error */}
           <Header />
-          {children}
+          <main className="main">{children}</main>
           {/* @ts-expect-error */}
           <Footer />
         </Providers>
